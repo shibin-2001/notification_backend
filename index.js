@@ -61,10 +61,10 @@ try{
   let notification = await req.body.notification;
   console.log(registrationToken, notification, "req");
   const message = {
-    notification: notification,
+    data: notification,
     token: registrationToken,
   };
-  await admin.messaging().send(message);
+  await admin.messaging().send({message:message});
 
   res.json({ message: "Notification sent successfully" });
 }catch(err){
