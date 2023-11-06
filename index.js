@@ -64,7 +64,7 @@ try{
     data: notification,
     token: registrationToken,
   };
-  await admin.messaging().send({message:message});
+  await admin.messaging().send(message);
 
   res.json({ message: "Notification sent successfully" });
 }catch(err){
