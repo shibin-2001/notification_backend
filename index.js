@@ -64,7 +64,9 @@ try{
     data: notification,
     token: registrationToken,
   };
-  await admin.messaging().send(message);
+  await admin.messaging().send(message).then((res)=>{
+    console.log(res,'res')
+  })
 
   res.json({ message: "Notification sent successfully" });
 }catch(err){
