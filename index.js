@@ -68,6 +68,7 @@ try{
 
   res.json({ message: "Notification sent successfully" });
 }catch(err){
+  console.log(err)
   res.json({ message: "Error sending notification" });
 }
 });
