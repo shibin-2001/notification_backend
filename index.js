@@ -61,6 +61,7 @@ try{
   let notification = await req.body.notification;
   console.log(registrationToken, notification, "req");
   const message = {
+    notification:notification,
     data: notification,
     token: registrationToken,
   };
