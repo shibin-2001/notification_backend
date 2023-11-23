@@ -64,10 +64,11 @@ try{
     notification:notification,
     data: notification,
     android: {
-      notification: {
+
         vibrationPattern: [200, 100, 200], 
         priority: 'high',
-      },
+        
+ 
     },
     token: registrationToken,
   };
