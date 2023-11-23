@@ -56,30 +56,31 @@ app.get("/", (req, res) => {
   res.send({ name: "vidhyan" });
 });
 app.post("/send_notification", async (req, res) => {
-try{
-  let registrationToken = await req.body.token;
-  let notification = await req.body.notification;
-  console.log(registrationToken, notification, "req");
-  const message = {
-    notification:notification,
-    data: notification,
-    android: {
+  try {
+    let registrationToken = await req.body.token;
+    let notification = await req.body.notification;
+    console.log(registrationToken, notification, "req");
+    const message = {
+      notification: notification,
+      data: notification,
+      android: {
+        notification: {
+          vibrationPattern: [200, 100, 200],
+        },
+      },
+      token: registrationToken,
+    };
+    await admin
+      .messaging()
+      .send(message)
+      .then((res) => {
+        console.log(res, "res");
+      });
 
-        vibrationPattern: [200, 100, 200], 
-        priority: 'high',
-        
- 
-    },
-    token: registrationToken,
-  };
-  await admin.messaging().send(message).then((res)=>{
-    console.log(res,'res')
-  })
-
-  res.json({ message: "Notification sent successfully" });
-}catch(err){
-  console.log(err)
-  res.json({ message: "Error sending notification" });
-}
+    res.json({ message: "Notification sent successfully" });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "Error sending notification" });
+  }
 });
 app.post("/login", LoginController);
