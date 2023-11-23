@@ -63,6 +63,12 @@ try{
   const message = {
     notification:notification,
     data: notification,
+    android: {
+      notification: {
+        vibrationPattern: [200, 100, 200], 
+        priority: 'high',
+      },
+    },
     token: registrationToken,
   };
   await admin.messaging().send(message).then((res)=>{
