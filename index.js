@@ -63,11 +63,7 @@ app.post("/send_notification", async (req, res) => {
     const message = {
       notification: notification,
       data: notification,
-      android: {
-        notification: {
-          vibrationPattern: [200, 100, 200],
-        },
-      },
+     
       token: registrationToken,
     };
     await admin
