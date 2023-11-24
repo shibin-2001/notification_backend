@@ -61,7 +61,7 @@ app.post("/send_notification", async (req, res) => {
     let notification = await req.body.notification;
     console.log(registrationToken, notification, "req");
     const message = {
-      notification: {...notification, icon:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/768px-Sign-check-icon.png',},
+      notification: notification,
       data: notification,
      
       token: registrationToken,
