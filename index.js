@@ -62,13 +62,13 @@ app.post("/send_notification", async (req, res) => {
     console.log(registrationToken, notification, "req");
     const message = {
       notification: notification,
-      data: notification,
+   
      
       token: registrationToken,
     };
     await admin
       .messaging()
-      .send({message:message})
+      .send({message:message,   data: notification,})
       .then((res) => {
         console.log(res, "res");
       });
