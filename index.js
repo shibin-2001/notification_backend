@@ -62,13 +62,13 @@ app.post("/send_notification", async (req, res) => {
     console.log(registrationToken, notification, "req");
     const message = {
       notification: notification,
-   topic:'Feather Chat',
+      data: notification,
      
       token: registrationToken,
     };
     await admin
       .messaging()
-      .send({message:message,   data: notification,})
+      .send(message)
       .then((res) => {
         console.log(res, "res");
       });
