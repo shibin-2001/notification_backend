@@ -68,7 +68,7 @@ app.post("/send_notification", async (req, res) => {
     };
     await admin
       .messaging()
-      .send(message)
+      .send({message:message})
       .then((res) => {
         console.log(res, "res");
       });
