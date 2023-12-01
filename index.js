@@ -98,14 +98,26 @@ app.post("/send_group_notification", async (req, res) => {
         (param) => param.phoneNumber === creator.phoneNumber
       );
       console.log(val, "val");
-      let payload = {
-        token: obj.fcmToken,
-        notification: {
-          title: incomingData.title,
-          body: `${(val.name, incomingData.body)}`,
-        },
-        data: {data},
-      };
+      let payload;
+      if(val){
+        payload = {
+          token: obj.fcmToken,
+          notification: {
+            title: incomingData.title,
+            body: `${val.name} ${incomingData.body}`,
+          },
+          data: {data},
+        };
+      }else{
+        payload = {
+          token: obj.fcmToken,
+          notification: {
+            title: incomingData.title,
+            body: `${creator.phoneNumber} ${incomingData.body}`,
+          },
+          data: {data},
+        };
+      }
       await admin
         .messaging()
         .send(payload)
