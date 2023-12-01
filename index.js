@@ -22,30 +22,30 @@ app.use(cors());
 app.use(express.json());
 // Define a schema and model for messages (you can add more fields as needed)
 
-// Serve static files (you can add a frontend later)
-app.use(express.static(__dirname + "/public"));
-console.log(process.env.MONGODB_URL);
+// // Serve static files (you can add a frontend later)
+// app.use(express.static(__dirname + "/public"));
+// console.log(process.env.MONGODB_URL);
 
-// Socket.io setup for real-time communication
-io.on("connection", (socket) => {
-  console.log("A user connected");
+// // Socket.io setup for real-time communication
+// io.on("connection", (socket) => {
+//   console.log("A user connected");
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected");
+//   });
 
-  // Handle incoming messages
-  socket.on("chat message", async (msg) => {
-    const message = new Message(msg);
+//   // Handle incoming messages
+//   socket.on("chat message", async (msg) => {
+//     const message = new Message(msg);
 
-    try {
-      await message.save();
-      io.emit("chat message", message);
-    } catch (err) {
-      console.error("Error saving message:", err);
-    }
-  });
-});
+//     try {
+//       await message.save();
+//       io.emit("chat message", message);
+//     } catch (err) {
+//       console.error("Error saving message:", err);
+//     }
+//   });
+// });
 
 // Start the server
 server.listen(PORT, () => {
@@ -63,7 +63,7 @@ app.post("/send_notification", async (req, res) => {
     const message = {
       notification: notification,
       data: notification,
-     
+
       token: registrationToken,
     };
     await admin
@@ -72,6 +72,47 @@ app.post("/send_notification", async (req, res) => {
       .then((res) => {
         console.log(res, "res");
       });
+
+    res.json({ message: "Notification sent successfully" });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "Error sending notification" });
+  }
+});
+app.post("/send_group_notification", async (req, res) => {
+  try {
+    let members = await req.body.members;
+    let incomingData = await req.body.data;
+    let creator = await req.body.user;
+    let chatRoom = await req.body.chatRoom;
+
+    let data = JSON.stringify({
+      ...incomingData,
+      ...creator,
+      chatRoom:chatRoom,
+    });
+    console.log(data)
+    // console.warn(creator, "creator");
+    members.forEach(async (obj) => {
+      let val = obj.contacts.find(
+        (param) => param.phoneNumber === creator.phoneNumber
+      );
+      console.log(val, "val");
+      let payload = {
+        token: obj.fcmToken,
+        notification: {
+          title: incomingData.title,
+          body: `${(val.name, incomingData.body)}`,
+        },
+        data: {data},
+      };
+      await admin
+        .messaging()
+        .send(payload)
+        .then((res) => {
+          console.log(res, "res");
+        });
+    });
 
     res.json({ message: "Notification sent successfully" });
   } catch (err) {
