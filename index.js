@@ -92,7 +92,7 @@ app.post("/send_group_notification", async (req, res) => {
       chatRoom:chatRoom,
     });
     console.log(data)
-    members = members.findAll(obj=>obj.phoneNumber !==creator.phoneNumber)
+    members = members.filter(obj=>obj.phoneNumber !== creator.phoneNumber)
     // console.warn(creator, "creator");
     members.forEach(async (obj) => {
       let val = obj.contacts.find(
