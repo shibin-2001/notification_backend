@@ -65,6 +65,15 @@ app.post("/send_notification", async (req, res) => {
       data: notification,
 
       token: registrationToken,
+      android: {
+        priority: "high",
+        notification: {
+            sound: "default",
+            default_vibrate_timings: false,
+            vibrate_timings: ['0.1s', '0.5s', '0.1s', '0.5s'],
+        },
+        "ttl": 240000
+    }
     };
     await admin
       .messaging()
@@ -107,7 +116,16 @@ app.post("/send_group_notification", async (req, res) => {
             title: incomingData.title,
             body: `${val.name} ${incomingData.body}`,
           },
-          data: {data},
+          data: {...data},
+          android: {
+            priority: "high",
+            notification: {
+                sound: "default",
+                default_vibrate_timings: false,
+                vibrate_timings: ['0.1s', '0.5s', '0.1s', '0.5s'],
+            },
+            "ttl": 240000
+        }
         };
       }else{
         payload = {
@@ -116,7 +134,16 @@ app.post("/send_group_notification", async (req, res) => {
             title: incomingData.title,
             body: `${creator.phoneNumber} ${incomingData.body}`,
           },
-          data: {data},
+          data: {...data},
+          android: {
+            priority: "high",
+            notification: {
+                sound: "default",
+                default_vibrate_timings: false,
+                vibrate_timings: ['0.1s', '0.5s', '0.1s', '0.5s'],
+            },
+            "ttl": 240000
+        }
         };
       }
       await admin
