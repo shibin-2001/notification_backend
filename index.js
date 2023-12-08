@@ -114,7 +114,7 @@ app.post("/send_group_notification", async (req, res) => {
           token: obj.fcmToken,
           notification: {
             title: incomingData.title,
-            body: `${val.name} ${incomingData.body}`,
+            body: `${val.name} : ${incomingData.body}`,
           },
           data: {...data},
           android: {
@@ -132,7 +132,7 @@ app.post("/send_group_notification", async (req, res) => {
           token: obj.fcmToken,
           notification: {
             title: incomingData.title,
-            body: `${creator.phoneNumber} ${incomingData.body}`,
+            body: `${creator.phoneNumber} : ${incomingData.body}`,
           },
           data: {...data},
           android: {
