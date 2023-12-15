@@ -63,7 +63,7 @@ app.post("/send_notification", async (req, res) => {
     console.log(registrationToken, notification,data, "req");
     const message = {
       notification: notification,
-      data: data,
+      data: {...data,type:'single'},
 
       token: registrationToken,
       android: {
@@ -117,7 +117,7 @@ app.post("/send_group_notification", async (req, res) => {
             title: incomingData.title,
             body: `${val.name} : ${incomingData.body}`,
           },
-          data: {chatRoomId:chatRoom},
+          data: {chatRoomId:chatRoom,type:'group'},
           android: {
             priority: "high",
             notification: {
@@ -135,7 +135,7 @@ app.post("/send_group_notification", async (req, res) => {
             title: incomingData.title,
             body: `${creator.phoneNumber} : ${incomingData.body}`,
           },
-        data: {chatRoomId:chatRoom},
+        data: {chatRoomId:chatRoom,type:'group'},
           android: {
             priority: "high",
             notification: {
