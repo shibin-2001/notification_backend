@@ -135,7 +135,7 @@ app.post("/send_group_notification", async (req, res) => {
             title: incomingData.title,
             body: `${creator.phoneNumber} : ${incomingData.body}`,
           },
-          data: {chatRoomId:chatRoom},
+        data: {chatRoomId:chatRoom},
           android: {
             priority: "high",
             notification: {
