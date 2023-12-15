@@ -60,7 +60,7 @@ app.post("/send_notification", async (req, res) => {
     let registrationToken = await req.body.token;
     let notification = await req.body.notification;
     let data = await req.body.data;
-    console.log(registrationToken, notification, "req");
+    console.log(registrationToken, notification,data, "req");
     const message = {
       notification: notification,
       data: data,
