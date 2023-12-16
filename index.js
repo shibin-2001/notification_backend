@@ -101,15 +101,15 @@ app.post("/send_group_notification", async (req, res) => {
       ...creator,
       chatRoom:chatRoom,
     });
-    console.log(data)
+    // console.log(data)
     members = members.filter(obj=>obj.phoneNumber !== creator.phoneNumber)
     // console.warn(creator, "creator");
     members.forEach(async (obj) => {
       let val = obj.contacts.find(
         (param) => param.phoneNumber === creator.phoneNumber
       );
-      console.log(val, "val");
-      console.log(obj, "obj");
+      // console.log(val, "val");
+      console.log(obj.fcmToken, "obj");
       let payload;
       if(val){
         payload = {
