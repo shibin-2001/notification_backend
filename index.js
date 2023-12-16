@@ -109,6 +109,7 @@ app.post("/send_group_notification", async (req, res) => {
         (param) => param.phoneNumber === creator.phoneNumber
       );
       console.log(val, "val");
+      console.log(obj, "obj");
       let payload;
       if(val){
         payload = {
