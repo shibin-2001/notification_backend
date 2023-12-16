@@ -153,7 +153,9 @@ app.post("/send_group_notification", async (req, res) => {
         .send(payload)
         .then((res) => {
           console.log(res, "res");
-        });
+        }).catch(err=>{
+          console.warn(err,'err')
+        })
     });
 
     res.json({ message: "Notification sent successfully" });
