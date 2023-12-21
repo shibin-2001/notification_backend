@@ -50,7 +50,7 @@ app.use(express.json());
 // Start the server
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  connectDB();
+  // connectDB();
 });
 app.get("/", (req, res) => {
   res.send({ name: "vidhyan" });
