@@ -5,7 +5,7 @@ const http = require("http");
 const cors = require("cors");
 const socketIo = require("socket.io");
 const admin = require("firebase-admin");
-const serviceAccount = require("./feather-chat-ea380-firebase-adminsdk-bg00t-3ee9ffb0ae.json");
+const serviceAccount = require("./feathers-chat-app-firebase-adminsdk-lny39-4fd86b2981");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://feather-chat-ea380-default-rtdb.firebaseio.com",
